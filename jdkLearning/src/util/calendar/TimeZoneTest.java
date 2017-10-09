@@ -9,7 +9,7 @@ public class TimeZoneTest {
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-//		timeZoneMethod();
+		timeZoneMethod();
 //		实现类其实跟抽象类的用法一样
 		TimeZone zone = SimpleTimeZone.getDefault();//获取默认的TimeZone
 		String displayName = zone.getDisplayName();   //获取显式的名字
