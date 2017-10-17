@@ -1,0 +1,56 @@
+PATH-------D:\jre\bin;D:/jre/bin/server;D:/jre/bin;D:/jre/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\IntelSGXPSW\bin\x64\Release\;C:\Program Files\Intel\IntelSGXPSW\bin\win32\Release\;c:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;;d:\Program Files\doxygen\bin;d:\Program Files\Git\cmd;D:\jdk\x64\jre;D:\jdk\x64\bin;C:\Windows\System32;D:\WEBtools\apache-ant-1.10.0-bin\apache-ant-1.10.0\bin;D:\jdk\x64\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\IntelSGXPSW\bin\x64\Release\;C:\Program Files\Intel\IntelSGXPSW\bin\win32\Release\;c:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;;d:\Program Files\doxygen\bin;d:\Program Files\Git\cmd;D:\WEBtools\apache-maven-3.5.0-bin\apache-maven-3.5.0\bin;D:\WEBtools\apache-maven-3.5.0-bin\apache-maven-3.5.0\bin;D:\WEBtools\gradle-3.5-all\gradle-3.5\bin;D:\Program Files (x86)\MySQL\MySQL Server 5.5\bin;D:\Program Files (x86)\Inno Setup 5;C:\Users\cobbl\AppData\Local\Microsoft\WindowsApps;;D:\BaiduYunDownload\eclipse-jee-neon-3-win32-x86_64\eclipse;
+USERDOMAIN_ROAMINGPROFILE-------DESKTOP-0MCNN4Q
+PROCESSOR_LEVEL-------6
+SYSTEMDRIVE-------C:
+VS140COMNTOOLS-------D:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
+SESSIONNAME-------Console
+ALLUSERSPROFILE-------C:\ProgramData
+PLATFORMCODE-------KV
+PROCESSOR_ARCHITECTURE-------AMD64
+PLATFORM-------MCD
+JRE_HOME-------D:\jdk\x64\jre
+MAVEN_HOME-------D:\WEBtools\apache-maven-3.5.0-bin\apache-maven-3.5.0
+PROGRAMFILES-------C:\Program Files
+MOZ_PLUGIN_PATH-------C:\Program Files (x86)\Foxit Software\Foxit Reader\plugins\
+PSMODULEPATH-------C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules\
+PROGRAMDATA-------C:\ProgramData
+USERNAME-------cobbl
+FPS_BROWSER_USER_PROFILE_STRING-------Default
+ONEDRIVE-------C:\Users\cobbl\OneDrive
+PATHEXT-------.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+REGIONCODE-------APJ
+WINDIR-------C:\WINDOWS
+HOMEPATH-------\Users\cobbl
+GIT-EDITOR-------D:\Program Files (x86)\Notepad++
+MYSQL_HOME-------D:\Program Files (x86)\MySQL\MySQL Server 5.5\bin
+PROCESSOR_IDENTIFIER-------Intel64 Family 6 Model 78 Stepping 3, GenuineIntel
+M2_HOME-------D:\WEBtools\apache-maven-3.5.0-bin\apache-maven-3.5.0
+PUBLIC-------C:\Users\Public
+LOCALAPPDATA-------C:\Users\cobbl\AppData\Local
+COMMONPROGRAMFILES(X86)-------C:\Program Files (x86)\Common Files
+USERDOMAIN-------DESKTOP-0MCNN4Q
+FPS_BROWSER_APP_PROFILE_STRING-------Internet Explorer
+LOGONSERVER-------\\DESKTOP-0MCNN4Q
+JAVA_HOME-------D:\jdk\x64
+PROMPT-------$P$G
+PROGRAMFILES(X86)-------C:\Program Files (x86)
+GRADLE_HOME-------D:\WEBtools\gradle-3.5-all\gradle-3.5
+ONLINESERVICES-------Online Services
+ANT_HOME-------D:\WEBtools\apache-ant-1.10.0-bin\apache-ant-1.10.0
+APPDATA-------C:\Users\cobbl\AppData\Roaming
+PROGRAMW6432-------C:\Program Files
+SYSTEMROOT-------C:\WINDOWS
+VBOX_MSI_INSTALL_PATH-------D:\Program Files\Oracle\VirtualBox\
+INNO SETUP 5 HOME-------D:\Program Files (x86)\Inno Setup 5
+OS-------Windows_NT
+COMMONPROGRAMW6432-------C:\Program Files\Common Files
+COMPUTERNAME-------DESKTOP-0MCNN4Q
+COMMONPROGRAMFILES-------C:\Program Files\Common Files
+COMSPEC-------C:\WINDOWS\system32\cmd.exe
+PROCESSOR_REVISION-------4e03
+#ENVTSLOGSSS8708-------80367328
+TEMP-------C:\Users\cobbl\AppData\Local\Temp
+HOMEDRIVE-------C:
+USERPROFILE-------C:\Users\cobbl
+TMP-------C:\Users\cobbl\AppData\Local\Temp
+NUMBER_OF_PROCESSORS-------4
