@@ -83,7 +83,6 @@ public class InputStreamTest {
 		long skip = pushbackInputStream.skip(5);//首先从缓存的数据中skip
 		
 //		回退指定数量的字节
-
 		pushbackInputStream.unread(b);//回退指定数组的数据
 		pushbackInputStream.unread(b, 0, b.length);//回退指定数组从指定位置开始,指定长度的数据
 		pushbackInputStream.unread(2);//回退一个字节,将回退的字节的int值保存到缓存

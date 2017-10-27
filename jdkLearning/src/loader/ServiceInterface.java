@@ -1,6 +1,7 @@
 package loader;
 
 public interface ServiceInterface {
-void sayHello();
-void sayHelloAgain();
+	void sayHello();
+
+	void sayHelloAgain();
 }

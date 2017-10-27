@@ -13,6 +13,8 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.Locale;
 
+import serialization.SerializableDomain;
+
 public class WriterTest {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException {

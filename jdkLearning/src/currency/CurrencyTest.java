@@ -10,14 +10,19 @@ public class CurrencyTest {
 	public static void main(String[] args) {
 		getInstance();
 		Currency instance = Currency.getInstance(Locale.CHINA);
-		String currencyCode = instance.getCurrencyCode();     									 //CNY
-		int defaultFractionDigits = instance.getDefaultFractionDigits();						//2  获取与该货币一起使用的默认小数位数。100.00
-		String displayName = instance.getDisplayName()	;										 //人民币
-		String displayName2 = instance.getDisplayName(Locale.FRANCE);				//yuan renminbi chinois
-		int numericCode = instance.getNumericCode();										//  156   Returns the ISO 4217 numeric code of this currency.
-		String symbol = instance.getSymbol();															//￥
-		String symbol2 = instance.getSymbol(Locale.FRANCE);								//CNY
-		String string = instance.toString();															//CNY
+		String currencyCode = instance.getCurrencyCode(); // CNY
+		int defaultFractionDigits = instance.getDefaultFractionDigits(); // 2
+																			// 获取与该货币一起使用的默认小数位数。100.00
+		String displayName = instance.getDisplayName(); // 人民币
+		String displayName2 = instance.getDisplayName(Locale.FRANCE); // yuan
+																		// renminbi
+																		// chinois
+		int numericCode = instance.getNumericCode(); // 156 Returns the ISO 4217
+														// numeric code of this
+														// currency.
+		String symbol = instance.getSymbol(); // ￥
+		String symbol2 = instance.getSymbol(Locale.FRANCE); // CNY
+		String string = instance.toString(); // CNY
 	}
 
 	@SuppressWarnings("unused")

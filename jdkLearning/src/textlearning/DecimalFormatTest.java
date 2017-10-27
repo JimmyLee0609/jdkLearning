@@ -1,5 +1,6 @@
 package textlearning;
 
+import java.text.ChoiceFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -89,7 +90,7 @@ public class DecimalFormatTest {
 	private static void formatSymbol() {
 		DecimalFormat df =new  DecimalFormat();
 		DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
-		
+//		改变这个十进制符号的设定,然后传递给  DecimalFormat可以改变它的解析符号和显示方式
 		Currency currency = dfs.getCurrency();//当前货币   CNY
 		String currencySymbol = dfs.getCurrencySymbol();//当前货币符号  ￥
 		char decimalSeparator = dfs.getDecimalSeparator();//十进制整数小数分隔符  .
@@ -104,7 +105,6 @@ public class DecimalFormatTest {
 		char percent = dfs.getPercent();//百分数模式    数值乘以100加上符号     %
 		char perMill = dfs.getPerMill();//千分数模式      数值乘以1000加上符号   ‰
 		char zeroDigit = dfs.getZeroDigit();//用于代表0-9任意数的符号    0
-		
 		int c=0;
 	}
 

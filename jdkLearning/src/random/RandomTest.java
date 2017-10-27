@@ -9,18 +9,19 @@ public class RandomTest {
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		long l=181783497276652981l*8682522807148012L;//8006678197202707420l
-		Random random = new Random();//seed=8006678197202707420l^当前时间毫秒数
-		int nextInt = random.nextInt(30);						//返回一个不大于30的int
-		int nextInt2 = random.nextInt();						//返回一个int
-		long nextLong = random.nextLong();           		//返回一个long
-		boolean nextBoolean = random.nextBoolean();//返回一个boolean
-		double nextDouble = random.nextDouble();		//返回一个double
-		float nextFloat = random.nextFloat();				//返回一个float
-		double nextGaussian = random.nextGaussian();//返回一个Gaussian高斯分布值，正太分布的值 0.0--1.0之间
-		byte[] b = new byte[] { 3, 5, 7, 2 };			
-		random.nextBytes(b);									//将byte数组中的元素随机的换成其他数字，数组长度不变
-		
+		long l = 181783497276652981l * 8682522807148012L;// 8006678197202707420l
+		Random random = new Random();// seed=8006678197202707420l^当前时间毫秒数
+		int nextInt = random.nextInt(30); // 返回一个不大于30的int
+		int nextInt2 = random.nextInt(); // 返回一个int
+		long nextLong = random.nextLong(); // 返回一个long
+		boolean nextBoolean = random.nextBoolean();// 返回一个boolean
+		double nextDouble = random.nextDouble(); // 返回一个double
+		float nextFloat = random.nextFloat(); // 返回一个float
+		double nextGaussian = random.nextGaussian();// 返回一个Gaussian高斯分布值，正太分布的值
+													// 0.0--1.0之间
+		byte[] b = new byte[] { 3, 5, 7, 2 };
+		random.nextBytes(b); // 将byte数组中的元素随机的换成其他数字，数组长度不变
+
 		IntStream ints = random.ints();
 		IntStream ints3 = random.ints(7);
 		IntStream ints2 = random.ints(0, 3);

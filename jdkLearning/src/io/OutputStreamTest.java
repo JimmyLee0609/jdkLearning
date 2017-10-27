@@ -16,6 +16,8 @@ import java.io.PrintStream;
 import java.nio.channels.FileChannel;
 import java.util.Locale;
 
+import serialization.SerializableDomain;
+
 public class OutputStreamTest {
 
 	@SuppressWarnings("unused")

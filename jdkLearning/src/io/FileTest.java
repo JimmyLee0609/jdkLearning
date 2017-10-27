@@ -1,6 +1,7 @@
 package io;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,6 +20,15 @@ public class FileTest {
 		File file = new File("d:/temp/users.xml");// 通过绝对路径
 		File file4 = new File(new URI("file:///d:/temp/users.xml"));// 通过URI就是
 																	// 协议++路径
+
+		File file8 = new File("/");// 运行java程序的 当前路径
+		String absolutePath3 = file8.getAbsolutePath();// 我的git文件 在 C:\
+
+		String pathseparator = File.pathSeparator;// 多个路径的分隔符 ;
+		char pathseparatorchar = File.pathSeparatorChar;// 多个路径的分隔符 ;
+		String separator = File.separator;// 路径的分隔符 \
+		char separatorchar = File.separatorChar;// 路径的分隔符 \
+
 		// 文件是否可读
 		boolean canExecute = file.canExecute();// true
 		// 文件是否存在
@@ -83,13 +93,13 @@ public class FileTest {
 		File canonicalFile = file.getCanonicalFile();// D:/temp/users.xml
 		String string = file.toString();
 
-		// 获取文件剩余空间    这个获取的是盘符下的大小
+		// 获取文件剩余空间 这个获取的是盘符下的大小
 		long freeSpace = file.getFreeSpace();// 50574974976
-		// 获取文件的整个大小   这个获取的是这个盘符下的大小
+		// 获取文件的整个大小 这个获取的是这个盘符下的大小
 		long totalSpace = file.getTotalSpace();// 287631732736
-		// 获取文件可用空间   这个获取的是盘符下的大小
+		// 获取文件可用空间 这个获取的是盘符下的大小
 		long usableSpace = file.getUsableSpace();// 50574974976
-		// 文件的长度   这个获取的是当前文件的大小
+		// 文件的长度 这个获取的是当前文件的大小
 		long length = file.length();// 0
 
 		// 将文件转换为路径
@@ -109,22 +119,39 @@ public class FileTest {
 		File[] listFiles = file5.listFiles();// 成为文件 null
 
 		File file7 = new File("d:/temp");
-		boolean directory3 = file7.isDirectory();//true
-		String[] list2 = file7.list();//列出文件名[A, abc.t, ABC.txt, B, HelloWorld.class, HelloWorld.jar, HelloWorld.java, mydomain.csr, seconrC.crt, sHelloWorld.jar, test.crt, testKey.crt, users.xml]
-		File[] listFiles2 = file7.listFiles();//列出文件
-		
-//		C:/Users/cobbl/AppData/Local/Temp   在系统指定的临时文件夹创建
+		boolean directory3 = file7.isDirectory();// true
+		String[] list2 = file7.list();// 列出文件名[A, abc.t, ABC.txt, B,
+										// HelloWorld.class, HelloWorld.jar,
+										// HelloWorld.java, mydomain.csr,
+										// seconrC.crt, sHelloWorld.jar,
+										// test.crt, testKey.crt, users.xml]
+		File[] listFiles2 = file7.listFiles();// 列出文件
+
+		// 按字母顺序比较两个抽象路径名。
+		int compareTo = file5.compareTo(file7);// 10
+
+		// C:/Users/cobbl/AppData/Local/Temp 在系统指定的临时文件夹创建
 		File createTempFile = File.createTempFile("abc", "test");
 		String absolutePath2 = createTempFile.getAbsolutePath();
-		
+
 		// 文件退出时删除
 		file.deleteOnExit();
 		/// 删除文件
 		boolean delete = file.delete();
 	}
 
+	@SuppressWarnings("unused")
 	private static void filter() {
-
+		File file = new File("D:\\temp");
+//		使用过滤器  过滤文件
+		String[] list = file.list(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				// dir 这里表示 file 的路径 name 就是路径下找到的每个文件的名字
+				int b = 0;
+				return false;
+			}
+		});
 	}
 
 }

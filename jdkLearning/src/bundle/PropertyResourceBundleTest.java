@@ -28,11 +28,9 @@ public class PropertyResourceBundleTest {
 		Object handleGetObject = bundle.handleGetObject("key");
 		PropertyResourceBundle.clearCache();
 		PropertyResourceBundle.clearCache(ClassLoader.getSystemClassLoader());
-		
-		PropertyResourceBundle.getBundle("baseName", 
-				Locale.CHINA, 
-				ClassLoader.getSystemClassLoader(), 
-				Control.getControl(Arrays.asList("","")));
+
+		PropertyResourceBundle.getBundle("baseName", Locale.CHINA, ClassLoader.getSystemClassLoader(),
+				Control.getControl(Arrays.asList("", "")));
 	}
 
 }
