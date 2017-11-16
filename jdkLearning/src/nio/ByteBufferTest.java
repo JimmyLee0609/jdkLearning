@@ -14,6 +14,8 @@ public class ByteBufferTest {
 @SuppressWarnings("unused")
 public static void main(String[] args) {
 	ByteBuffer wrap = ByteBuffer.allocate(500);
+	ByteBuffer.wrap("test".getBytes());
+	silce();
 	byteBuffer();
 //	大端，小端的标志
 	byteOrder();
@@ -31,6 +33,30 @@ public static void main(String[] args) {
 	
 //	=========单个的读取，写入操作===========
 	singlePutGet(wrap);
+}
+
+@SuppressWarnings("unused")
+private static void silce() {
+//	片段，就是共享原来缓存的数组，
+//	将offset设置为position的位置，然后将limit和capacity都设置为原来的remain
+//	新的position为0，mark为-1
+ByteBuffer wrap = ByteBuffer.wrap("test for slice".getBytes());
+
+ByteBuffer put2 = wrap.put("add string".getBytes());
+
+ByteBuffer slice = wrap.slice();
+byte b1 = slice.get();
+byte b2 = slice.get();
+byte b3 = slice.get();
+byte b4 = slice.get();
+byte b5 = slice.get();
+byte b6 = slice.get();
+
+
+ByteBuffer put = wrap.put("after slice".getBytes());
+
+
+
 }
 
 @SuppressWarnings("unused")
