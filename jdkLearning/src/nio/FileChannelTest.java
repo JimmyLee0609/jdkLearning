@@ -33,7 +33,7 @@ import java.util.HashSet;
 public class FileChannelTest {
 
 	public static void main(String[] args) throws IOException {
-		lock();
+//		lock();
 		transfer();
 		openChannel();
 		fileChannelMethod();
@@ -52,8 +52,8 @@ public class FileChannelTest {
 //		NonReadableChannelException -管道没有StandardOpenOption.READ，写true抛异常
 //		NonWritableChannelException - 管道没有StandardOpenOption.WRITE，写false抛异常
 //		管道不能将重复的锁定管道的部分内容     读共享
-//		FileLock lock2 = fc.lock(2,30, false);//将文件的部分内容锁定,其他进程,线程,不能读取，修改锁定内容,否则抛出异常.
-		FileLock lock3 = fc.lock(71, 70, true);//将文件的部分内容锁定,其他进程，线程,可以读取内部,但是不能修改锁定内容,否则抛出异常.
+		FileLock lock2 = fc.lock(2,30, false);//将文件的部分内容锁定,其他进程,线程,不能读取，修改锁定内容,否则抛出异常.
+//		FileLock lock3 = fc.lock(71, 70, true);//将文件的部分内容锁定,其他进程，线程,可以读取内部,但是不能修改锁定内容,否则抛出异常.
 		Thread thread = new Thread(() -> {
 			FileChannel fcc;
 			try {
@@ -71,8 +71,8 @@ public class FileChannelTest {
 
 		});
 		 thread.start();;//另一个程序已锁定文件的一部分，进程无法访问。
-		lock3.release();
-//		lock2.release();
+//		lock3.release();
+		lock2.release();
 //		 lock.release();
 		fc.close();
 	}
@@ -177,30 +177,38 @@ public class FileChannelTest {
 		randomAccessFile2.close();
 	}
 
+	@SuppressWarnings("unused")
 	private static void transfer() throws IOException {
 		FileChannel inChannel = FileChannel.open(Paths.get("d:/temp/abc.txt"), StandardOpenOption.READ,
 				StandardOpenOption.WRITE);
 		FileChannel outChannle = FileChannel.open(Paths.get("d:temp/bbb.txt"), StandardOpenOption.READ,
 				StandardOpenOption.CREATE, StandardOpenOption.WRITE);
 		// 将管道转换 用的是直接缓冲区的方式Direct 使用虚拟缓存 映射缓存
-		/*
-		 * int write3 =
-		 * inChannel.write(ByteBuffer.wrap("测试原来的读通道转前，写出数据，写到哪里".getBytes("GBK"
-		 * ))); ByteBuffer read = ByteBuffer.allocate(500); int read2 =
-		 * inChannel.read(read); String string = new String(read.array(),"gbk");
-		 */
+		
+		  int write3 =inChannel.write(ByteBuffer.wrap("测试原来的读通道转前，写出数据，写到哪里".getBytes("GBK"  ))); 
+		  int write = outChannle.write(ByteBuffer.wrap("测试原来的接收通道的数据写到哪里".getBytes("GBK")));
+		  ByteBuffer one = ByteBuffer.allocate(500); 
+		  ByteBuffer two = ByteBuffer.allocate(500); 
+		  ByteBuffer three = ByteBuffer.allocate(500); 
+		
+//		  int read2 = inChannel.read(one); 
+//		  String string = new String(one.array(),"gbk");
 		// 合并一个读通道。
-		// long transferFrom = outChannle.transferFrom(inChannel, 0,
-		// inChannel.size());
-
+		 long transferFrom = outChannle.transferFrom(inChannel, 0,inChannel.size());
+		 outChannle.read(two);
+		 String string2 = new String(two.array(),"gbk");
+		 inChannel.position(0);
+		 inChannel.read(three);
+		 String string3 = new String(three.array(),"gbk");
+		 
 		// 合并一个写通道
-		int write4 = inChannel.write(ByteBuffer.wrap("原来的通道transfer前，write()".getBytes("GBK")));
-		int write = outChannle.write(ByteBuffer.wrap("接收通道前，write()".getBytes()));
+//		int write4 = inChannel.write(ByteBuffer.wrap("原来的通道transfer前，write()".getBytes("GBK")));
+//		int write = outChannle.write(ByteBuffer.wrap("接收通道前，write()".getBytes()));
 
-		inChannel.transferTo(0, inChannel.size(), outChannle);
+//		inChannel.transferTo(0, inChannel.size(), outChannle);
 
-		int write5 = inChannel.write(ByteBuffer.wrap("原来的通道transfer后，write()".getBytes("GBK")));
-		int write2 = outChannle.write(ByteBuffer.wrap(("接收通道后。write").getBytes()));
+//		int write5 = inChannel.write(ByteBuffer.wrap("原来的通道transfer后，write()".getBytes("GBK")));
+//		int write2 = outChannle.write(ByteBuffer.wrap(("接收通道后。write").getBytes()));
 		// 本通道合并另一个可读的通道，可以读到合并操作前的被合并通道的内容
 		// 本通道，合并到另一个通道，可以将合并前，本通道的内容写到另一个通道中。
 

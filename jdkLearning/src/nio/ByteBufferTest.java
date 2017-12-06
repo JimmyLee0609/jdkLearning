@@ -43,14 +43,15 @@ private static void silce() {
 ByteBuffer wrap = ByteBuffer.wrap("test for slice".getBytes());
 
 ByteBuffer put2 = wrap.put("add string".getBytes());
-
+//	offset记录为原来的position, 新的position=0，mark=-1, limit=capacity=原来的remain
+//就是将原来的缓存使用标记的方式截断。但是没有真的将数据截断
 ByteBuffer slice = wrap.slice();
-byte b1 = slice.get();
+byte b1 = slice.get();//原来position的位置
 byte b2 = slice.get();
 byte b3 = slice.get();
 byte b4 = slice.get();
-byte b5 = slice.get();
-byte b6 = slice.get();
+
+
 
 
 ByteBuffer put = wrap.put("after slice".getBytes());
