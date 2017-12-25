@@ -28,12 +28,13 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.file.OpenOption;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.EnumSet;
 import java.util.HashSet;
 
 public class FileChannelTest {
 
 	public static void main(String[] args) throws IOException {
-//		lock();
+		lock();
 		transfer();
 		openChannel();
 		fileChannelMethod();
@@ -44,11 +45,15 @@ public class FileChannelTest {
 
 	@SuppressWarnings("unused")
 	private static void lock() throws IOException {
+//		打开一个通道                                   路径                                           打开参数
 		FileChannel fc = FileChannel.open(Paths.get("d:/temp/abc.txt"), StandardOpenOption.READ,StandardOpenOption.WRITE);
+//		强制缓冲区和硬盘文件是否同步
 		fc.force(true);
 		int write = fc.write(ByteBuffer.wrap("测试锁定有什么用".getBytes()));
-//		FileLock lock = fc.lock();//锁定之后,其他进程就无法读取文件,内部用的是 lock(0L, Long.MAX_VALUE, false);
-		
+//		lock方法会阻塞线程，直到获取到锁，
+		FileLock lock = fc.lock();//锁定之后,其他进程就无法读取文件,内部用的是 lock(0L, Long.MAX_VALUE, false);
+//		tryLock会立即返回，锁不到就返回null
+//		FileLock tryLock = fc.tryLock();
 //		NonReadableChannelException -管道没有StandardOpenOption.READ，写true抛异常
 //		NonWritableChannelException - 管道没有StandardOpenOption.WRITE，写false抛异常
 //		管道不能将重复的锁定管道的部分内容     读共享
@@ -78,9 +83,13 @@ public class FileChannelTest {
 	}
 
 	private static void openChannel() throws IOException {
+//		打开通道                          
 		FileChannel appendChannel = FileChannel.open(Paths.get("d:/temp/abc.t"), StandardOpenOption.READ);
+//		通道的大小，就是文件的大小
 		long size = appendChannel.size();
+//		通道是否打开
 		boolean open = appendChannel.isOpen();
+//		通道的当前当前文件位置
 		long position = appendChannel.position();
 		ByteBuffer src = ByteBuffer.wrap("测试管道写出数据".getBytes());
 		// appendChannel.write(src);
@@ -91,27 +100,32 @@ public class FileChannelTest {
 		HashSet<OpenOption> hashSet = new HashSet<OpenOption>();
 		hashSet.add(StandardOpenOption.READ);
 		hashSet.add(StandardOpenOption.WRITE);
-
+		EnumSet<StandardOpenOption> of = EnumSet.of(StandardOpenOption.READ, StandardOpenOption.WRITE);
 	}
 
 	@SuppressWarnings("unused")
 	private static void filechannel() throws IOException {
 		FileChannel fChannel = FileChannel.open(Paths.get("d:/temp/abc.t"), StandardOpenOption.READ,
 				StandardOpenOption.WRITE);
-
+//		管道的大小，就是文件的大小
 		long size = fChannel.size();
-
+//		管道的状态是否打开
 		boolean open = fChannel.isOpen();
+//		管道的当前position
 		long position = fChannel.position();
+//		获取锁，立即返回不会阻塞
 		FileLock tryLock = fChannel.tryLock();
+//		强制文件的缓存和硬件文件是一致的
 		fChannel.force(true);
+//		将文件截断为指定的大小
 		FileChannel truncate = fChannel.truncate(size - 1);
+//		将文件部分锁定，并定义是否为排他锁
 		FileLock lock = fChannel.lock(position, size, false);
-
+//		设定管道的当前位置
 		FileChannel position2 = fChannel.position(size - size / 2);
 		// 映射到虚拟内存 一般用在大文件
 		MappedByteBuffer map = fChannel.map(MapMode.READ_WRITE, 0, size);
-
+//		关闭管道
 		fChannel.close();
 
 	}
@@ -164,12 +178,12 @@ public class FileChannelTest {
 		ByteBuffer buf3 = ByteBuffer.allocate(100);
 
 		ByteBuffer[] bufs = { buf1, buf2, buf3 };
-		// 分散读取
+		// 分散读取,会依次读取多个缓冲区的数据
 		long read = channel.read(bufs);
 		channel.close();
 		randomAccessFile.close();
 
-		// 聚集写入
+		// 聚集写入，将多个缓冲区的数据一次写出
 		RandomAccessFile randomAccessFile2 = new RandomAccessFile("", "rw");
 		FileChannel channel2 = randomAccessFile2.getChannel();
 		long write = channel2.write(bufs);

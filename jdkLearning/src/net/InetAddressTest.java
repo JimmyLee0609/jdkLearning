@@ -23,8 +23,8 @@ public class InetAddressTest {
 		 inet4Address();
 		// inet6Address();
 		// inetSocketAddress();
-		scanLocalPort();
-		multicastSocket();
+//		scanLocalPort();
+//		multicastSocket();
 		networkInterface();
 	}
 
@@ -272,10 +272,12 @@ public class InetAddressTest {
 
 		InetAddress byAddress2 = InetAddress.getByAddress("www.bing.com",
 				new byte[] { (byte) 202, 89, (byte) 233, 101 });
-
+		InetAddress byAddress3 = InetAddress.getByAddress(new byte[]{(byte)202,5,5,(byte)252});
+		
 		// 确定主机名称的IP地址。 www.bing.com/202.89.233.101
 		// 会去互联网查找
 		InetAddress byName = InetAddress.getByName("www.bing.com");
+		InetAddress byName2 = InetAddress.getByName("192.168.1.1");
 		// 返回本机ip地址，通过从系统中检索主机的名称，然后将名称解析为InetAddress来实现
 		// DESKTOP-0MCNN4Q/192.168.11.1
 		InetAddress localHost = InetAddress.getLocalHost();

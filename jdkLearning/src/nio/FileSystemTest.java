@@ -13,6 +13,7 @@ import java.nio.file.WatchService;
 import java.nio.file.attribute.DosFileAttributeView;
 import java.nio.file.attribute.DosFileAttributes;
 import java.nio.file.attribute.FileStoreAttributeView;
+import java.nio.file.attribute.UserPrincipal;
 import java.nio.file.attribute.UserPrincipalLookupService;
 import java.nio.file.spi.FileSystemProvider;
 import java.util.HashMap;
@@ -58,6 +59,8 @@ public class FileSystemTest {
 		PathMatcher pathMatcher = defaultSys.getPathMatcher("glob:.java");// 有两种语法 glob regex
 		// 获取用户寻找服务
 		UserPrincipalLookupService userPrincipalLookupService = defaultSys.getUserPrincipalLookupService();
+//																																					电脑的用户名
+		UserPrincipal lookupPrincipalByName = userPrincipalLookupService.lookupPrincipalByName("cobbl");
 		// 文件系统是否打开
 		boolean open = defaultSys.isOpen();// true
 		// 文件系统是否只读

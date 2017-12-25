@@ -39,7 +39,7 @@ public class ServerSocketTest {
 //			accept1.getOutputStream().close();
 			boolean closed = serverSocket.isClosed();
 			boolean closed2 = accept1.isClosed();
-			
+//			ÓÀ¾Ã×èÈûµÈ´ý
 			Socket accept2 = serverSocket.accept();
 			Socket accept3 = serverSocket.accept();
 			Socket accept4 = serverSocket.accept();

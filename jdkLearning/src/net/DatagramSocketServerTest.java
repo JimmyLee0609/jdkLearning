@@ -80,11 +80,7 @@ public class DatagramSocketServerTest {
 		String string8 = new String(datagramPacket.getData(),"gbk");
 		server.receive(datagramPacket);
 		String string9 = new String(datagramPacket.getData(),"gbk");
-		
-		
-		
-		
-		
+				
 		
 		
 

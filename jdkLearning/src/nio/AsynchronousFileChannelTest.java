@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.FileAttribute;
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,8 +24,8 @@ public class AsynchronousFileChannelTest {
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException, TimeoutException {
 //		open();
 //		statue();
-//		read();
-		lock();
+		read();
+//		lock();
 	}
 
 	@SuppressWarnings("unused")
@@ -36,7 +37,7 @@ public class AsynchronousFileChannelTest {
 																EnumSet.of(StandardOpenOption.READ, StandardOpenOption.WRITE), 
 																ftp, 
 																new FileAttribute<?>[0]);
-//		返回的是一个future对象
+//		返回的是一个future对象,     锁定文件的指定部分内容，限定锁是排他锁还是共享锁
 		Future<FileLock> lock = open.lock(10, 1, false);
 		Future<FileLock> lock2 = open.lock(20, 1, false);
 		Future<FileLock> lock3 = open.lock(30, 2, true);
@@ -61,13 +62,19 @@ public class AsynchronousFileChannelTest {
 				System.out.println("锁失败");
 			}
 		};
+//		使用指定的锁对象将指定的文件部分进行锁定，并使用一个处理器，成功锁定和失败锁定的操作
 		open.lock(1000,1,false,fileLock3, handler);
+		
 //		这个方法直接返回锁对象
 		FileLock tryLock = open.tryLock();
-		
+//		锁被哪个通道获取到
 		Channel acquiredBy = fileLock3.acquiredBy();
+//		释放锁
 		fileLock3.release();
+
+//		通道关闭
 		open.close();
+//		线程池关闭
 		ftp.shutdown();
 	}
 
@@ -93,11 +100,13 @@ public class AsynchronousFileChannelTest {
 		dst.rewind();
 		
 		ByteBuffer next = ByteBuffer.allocate(26);
-		open.read(dst, 10, dst, new CompletionHandler<Integer,ByteBuffer>(){
+		
+		open.read(dst, 10, next, new CompletionHandler<Integer,ByteBuffer>(){
 			@Override
 			public void completed(Integer result, ByteBuffer attachment) {
 //				io操作成功调用这个，result是Integer类型，用于记录读取了多少个字节
-				
+				boolean equals = Objects.equals(next, attachment);
+//				attachment就是传入的第三个参数。需要是ByteBuffer类型。可以对其进行flip,rewing等操作
 			}
 			@Override
 			public void failed(Throwable exc, ByteBuffer attachment) {
@@ -113,7 +122,9 @@ public class AsynchronousFileChannelTest {
 		ByteBuffer src = ByteBuffer.wrap("测试写出".getBytes());
 //		将缓冲区中的数据写到文件，从文件的position位置开始覆盖，
 		open.write(src, 0);
+//		将通道截断为指定的大小
 		AsynchronousFileChannel truncate = open.truncate(5);
+		
 		ByteBuffer src1 = ByteBuffer.wrap("测试completionHandler".getBytes());
 		open.close();
 //		将缓冲区的数据写到文件，从position位置开始覆盖，

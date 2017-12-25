@@ -38,13 +38,18 @@ public class URLConnectionTest {
 	}
 
 	private static void trySocket() throws IOException {
+//		新建一个Socket套接字
 		Socket socket = new Socket();
+//		新建一个套接字地址，远程地址，用于连接
 		InetSocketAddress inetSocketAddress = new InetSocketAddress("www.baidu.com",80);
+//		套接字连接到远程地址
 		socket.connect(inetSocketAddress);
+//		获取套接字的输出流
 		OutputStream outputStream = socket.getOutputStream();
-		
+//		将输出流进行转换
 		BufferedOutputStream bos = new BufferedOutputStream(outputStream);
 		PrintStream out = new PrintStream(bos);
+//		HTTP的报文请求头
 		out.println("GET / HTTP/1.1");
 		out.println("Accept: text/html, application/xhtml+xml, image/jxr, */*");
 		out.println("Accept-Language: zh-CN");
@@ -53,13 +58,16 @@ public class URLConnectionTest {
 		out.println("Host: www.baidu.com");
 		out.println("Connection: Keep-Alive");
 		out.println("Accept-Charset: utf-8");
+//		报文格式换行
 		out.println();
+//		请求体
 		out.println();
 		out.flush();
-		
+//		获取套接字的输入流
 		InputStream inputStream = socket.getInputStream();
+//		将流转换成通道
 		ReadableByteChannel newChannel = Channels.newChannel(inputStream); 
-		
+//		使用缓冲区操作通道
 		ByteBuffer allocate = ByteBuffer.allocate(1024);
 		newChannel.read(allocate);
 		int read = newChannel.read(allocate);
@@ -68,8 +76,11 @@ public class URLConnectionTest {
 		CharsetDecoder newDecoder = defaultCharset.newDecoder();
 		CharBuffer decode = newDecoder.decode(allocate);
 		
+//		逐行读取   java的类StringTokenizer可以根据传入的字符串来将流中的数据分割读取
 		StringTokenizer stringTokenizer = new StringTokenizer(decode.toString(),"\r\n");
+		
 		String nextToken = stringTokenizer.nextToken();
+		
 		System.out.println(nextToken);
 		String nextToken2 = stringTokenizer.nextToken();
 		System.out.println(nextToken2);
@@ -79,10 +90,13 @@ public class URLConnectionTest {
 
 	@SuppressWarnings("unused")
 	private static void tryConnect() throws IOException {
+//		新建一个URL对象
 		URL url = new URL("http://www.imooc.com:80/");
+//		获取协议    http
 		String protocol = url.getProtocol();
+//		打开连接
 		HttpURLConnection openConnection = (HttpURLConnection) url.openConnection();
-	
+//		获取连接的请求头
 		Map<String, List<String>> requestProperties = openConnection.getRequestProperties();
 		for (String reqs : requestProperties.keySet()) {
 			List<String> list = requestProperties.get(reqs);

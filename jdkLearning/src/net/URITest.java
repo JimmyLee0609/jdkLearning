@@ -20,7 +20,7 @@ public class URITest {
 	private static void url() throws IOException, URISyntaxException {
 //		新建URL
 //		URL url = new URL("http://www.bing.com");
-		URL url = new URL("file:/d:/temp/abc.txt");
+		URL url = new URL("file:///d:/temp/abc.txt");
 //		获取协议
 		String protocol = url.getProtocol();//http    file
 //		获取文件
@@ -52,6 +52,9 @@ public class URITest {
 		URLConnection openConnection = url.openConnection();
 //		打开流
 		InputStream openStream = url.openStream();
+		byte [] b=new byte[30];
+		int read = openStream.read(b);
+		openStream.close();
 //		流的可用字节
 		int available = openStream.available();//9122   84
 //		打开连接,获取上下文
@@ -64,6 +67,7 @@ public class URITest {
 	@SuppressWarnings("unused")
 	private static void uri()  throws MalformedURLException, URISyntaxException{
 		// 创建一个URI
+//													协议           主机名             端口 路径   参数      fragment           
 				URI create = URI.create("HTTP://WWW.BING.COM:80/ABG?TTT=YY#TEST");
 				// 将uri转换为url
 				URL url = create.toURL();

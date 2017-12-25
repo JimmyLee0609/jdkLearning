@@ -71,7 +71,7 @@ public class CharBufferTest {
 //		将当前position的值记录到mark
 		Buffer mark = allocate.mark();
 //		将position的值设置为mark的值    positoion=mark
-		Buffer reset = allocate.reset();
+		Buffer reset = allocate.reset();//mark之后才能用
 //		倒带          从新回到缓冲区的开头               position = 0;        mark = -1;
 		Buffer rewind = allocate.rewind();
 //		将数据压缩    将缓冲区的     position到  limit之间的数据     移到缓冲区的开头

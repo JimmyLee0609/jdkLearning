@@ -2,12 +2,16 @@ package nio;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
+import java.nio.file.WatchEvent.Kind;
+import java.nio.file.WatchEvent.Modifier;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.nio.file.Watchable;
+import java.util.Arrays;
 import java.util.List;
 
 public class WatchServiceTest {
@@ -17,9 +21,20 @@ public class WatchServiceTest {
 		// 获取文件观察服务
 		WatchService newWatchService = FileSystems.getDefault().newWatchService();
 		// 注册观察服务,只会监控当前文件夹下，子目录的不会监控
-		WatchKey register3 = Paths.get("d:/temp").register(newWatchService, StandardWatchEventKinds.ENTRY_CREATE,
+		
+		@SuppressWarnings("unchecked")
+		Kind<Path>[] swek = (Kind<Path>[]) Arrays.asList(StandardWatchEventKinds.ENTRY_CREATE,
 				StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY,
-				StandardWatchEventKinds.OVERFLOW);
+				StandardWatchEventKinds.OVERFLOW).toArray();
+		
+		Modifier modifier = new WatchEvent.Modifier(){
+			@Override
+			public String name() {
+				int b=0;
+				return null;
+			}};
+//			Modifier是没有实现的
+//		WatchKey register3 = Paths.get("d:/temp").register(newWatchService,swek,modifier);
 		WatchKey register4 = Paths.get("d:/temp/A").register(newWatchService, StandardWatchEventKinds.ENTRY_CREATE,
 				StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY,
 				StandardWatchEventKinds.OVERFLOW);

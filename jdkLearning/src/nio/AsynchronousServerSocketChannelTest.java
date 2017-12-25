@@ -23,10 +23,11 @@ public class AsynchronousServerSocketChannelTest {
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
 //		打开一个服务器套接字通道
 		AsynchronousServerSocketChannel open = AsynchronousServerSocketChannel.open();
-
+		
 //		新建一个异步通道组，线程池
 		AsynchronousChannelGroup group = 
 								AsynchronousChannelGroup.withThreadPool(Executors.newFixedThreadPool(5));
+		
 //		使用一部通道组，新建一个服务器套接字通道
 		AsynchronousServerSocketChannel open2 = AsynchronousServerSocketChannel.open(group);
 //		通道绑定本地地址前的地址

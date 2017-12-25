@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.file.DirectoryStream;
@@ -60,7 +62,7 @@ public class FilesTest {
 //		 fileAttitude();
 		// readBasicAttribute();
 		// 创建文件夹
-		 createDirectory();
+//		 createDirectory();
 		// 创建文件，连接
 		// createFile();
 		// 删除文件
@@ -74,49 +76,74 @@ public class FilesTest {
 		// 写出文件
 		// writeFile();
 		// 文件存储设备
-		fileStore();
+//		fileStore();
 		walkFile();
 	}
 
-	private static void walkFile() throws IOException {
-		Stream<Path> walk = Files.walk(Paths.get("d:/temp"), 2, FileVisitOption.FOLLOW_LINKS);
-		Files.walkFileTree(Paths.get("d:/temp"), EnumSet.of(FileVisitOption.FOLLOW_LINKS), 2,
-				new SimpleFileVisitor<Path>() {
-			 @Override
-			    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
-			        throws IOException
-			    {
-			        Objects.requireNonNull(dir);
-			        Objects.requireNonNull(attrs);
-			        return FileVisitResult.CONTINUE;
-			    }
-			 @Override
-			    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-			        throws IOException
-			    {
-			        Objects.requireNonNull(file);
-			        Objects.requireNonNull(attrs);
-			        return FileVisitResult.CONTINUE;
-			    }
-			 @Override
-			    public FileVisitResult visitFileFailed(Path file, IOException exc)
-			        throws IOException
-			    {
-			        Objects.requireNonNull(file);
-			        throw exc;
-			    }
-			 
-			 @Override
-			    public FileVisitResult postVisitDirectory(Path dir, IOException exc)
-			        throws IOException
-			    {
-			        Objects.requireNonNull(dir);
-			        if (exc != null)
-			            throw exc;
-			        return FileVisitResult.CONTINUE;
-			    }
-			 
-				});
+	private static void walkFile()  {
+		try {
+			Stream<Path> walk = Files.walk(Paths.get("d:/temp"), 2, FileVisitOption.FOLLOW_LINKS);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		遍历文件              文件基础目录                                    访问的方式                               遍历文件夹深度
+		try {
+			Files.walkFileTree(Paths.get("d:/temp"), EnumSet.of(FileVisitOption.FOLLOW_LINKS), 50,
+					new SimpleFileVisitor<Path>() { //visitor
+				 @Override
+				    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+				        throws IOException
+				    {
+//				 正在访问的文件夹
+				        Objects.requireNonNull(dir);
+				        Objects.requireNonNull(attrs);
+//			        					继续遍历                     跳过本层目录的文件       跳过这个文件夹的子目录           终止
+//			        FileVisitResult.CONTINUE;FileVisitResult.SKIP_SIBLINGS;FileVisitResult.SKIP_SUBTREE;FileVisitResult.TERMINATE
+//			        使用FileVisitResult来控制遍历到这个文件夹后的操作
+				        return FileVisitResult.CONTINUE;
+				    }
+				 @Override
+				    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+				        throws IOException
+				    {
+//				 遍历到每一个文件
+				        Objects.requireNonNull(file);
+				        Objects.requireNonNull(attrs);
+				        try{
+				        FileChannel open = FileChannel.open(file, StandardOpenOption.READ);
+				        int read = open.read(ByteBuffer.allocate(50));
+				        }catch(IOException e){
+				        	visitFileFailed(file, e);
+				        }
+				        return FileVisitResult.CONTINUE;
+				    }
+				 @Override
+				    public FileVisitResult visitFileFailed(Path file, IOException exc)
+				        throws IOException
+				    {
+//				访问文件发生错误时调用，如无权限
+				        Objects.requireNonNull(file);
+//				        throw exc;
+				       return  FileVisitResult.CONTINUE;
+				    }
+				 
+				 @Override
+				    public FileVisitResult postVisitDirectory(Path dir, IOException exc)
+				        throws IOException
+				    {
+//				 访问文件夹之后条用
+				        Objects.requireNonNull(dir);
+				        if (exc != null)
+				            throw exc;
+				        return FileVisitResult.CONTINUE;
+				    }
+				 
+					});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -359,7 +386,7 @@ public class FilesTest {
 		long size2 = Files.size(Paths.get("d:/temp"));// 文件夹也可以 大小4096
 		// 指定路径是否是文件夹
 		boolean directory = Files.isDirectory(Paths.get("d:/temp/abc.t"), LinkOption.NOFOLLOW_LINKS);// false
-		// 是否是可执行文件
+		// 是否是可执行文件 
 		boolean executable = Files.isExecutable(Paths.get("d:/temp/abc.t"));// true
 		// 是否隐藏
 		boolean hidden = Files.isHidden(Paths.get("d:/temp/abc.t"));// false
