@@ -1,4 +1,6 @@
-package dynamic.stuff;
+package openmbean.stuff;
+
+import javax.management.openmbean.CompositeData;
 
 public class Book {
 	String name;
@@ -39,5 +41,11 @@ public class Book {
 	public void setISBN(String iSBN) {
 		ISBN = iSBN;
 	}
-
+	public static Book form(CompositeData data) {
+		String isbn = (String)data.get("ISBN");
+		String name =(String) data.get("name");
+		CompositeData bookMarkData = (CompositeData)data.get("bookMark");
+		BookMark mark = BookMark.form(bookMarkData);
+		return new Book(name,isbn,mark);
+	}
 }

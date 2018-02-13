@@ -1,4 +1,6 @@
-package dynamic.stuff;
+package openmbean.stuff;
+
+import javax.management.openmbean.CompositeData;
 
 public class BookMark {
 String bookMark;
@@ -25,5 +27,8 @@ public BookMark() {
 public String toString() {
 	return "--¡·  BookMark [mark=" + bookMark + "]";
 }
-
+public static BookMark form(CompositeData data) {
+	String mark =(String) data.get("bookMark");
+	return new BookMark(mark);
+}
 }

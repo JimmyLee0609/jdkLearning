@@ -2,8 +2,6 @@ package tjavax.managerment.standardbean;
 
 import javax.management.StandardMBean;
 
-import tjavax.managerment.standardbean.StandardDMBean;
-
 public class StandardMBeanOtherImpl extends StandardMBean implements StandardDMBean {
 	public boolean isTraceOn() {
 		return TraceOn;
@@ -64,6 +62,25 @@ public void reset() {
 	TraceOn=false;
 	DebugOn=false;
 	System.out.println("reset");
+}
+@Override
+public void setNumberOfResets(int num) {
+this.NumberOfResets=num;	
+}
+float dd;
+@Override
+public float getDd() {
+	// TODO Auto-generated method stub
+	return dd;
+}
+@Override
+public void setDd(float dd) {
+this.dd=dd;	
+}
+@Override
+public void add(float f) {
+	// TODO Auto-generated method stub
+	
 }
 
 }

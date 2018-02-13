@@ -1,8 +1,17 @@
 package tjavax.managerment.standardbean;
 
-public class StandardD implements StandardDMBean {
-private boolean TraceOn=true;
+import mxbean.beans.AnnotationBean;
 
+public class StandardD implements StandardDMBean {
+public float getDd() {
+	return Dd;
+}
+public void setDd(float dd) {
+	this.Dd = dd;
+}
+
+private float Dd=1.0f;
+private boolean TraceOn=true;
 private boolean DebugOn;
 private int NumberOfResets;
 public StandardD() {}
@@ -26,6 +35,10 @@ public StandardD(boolean trace,boolean debug) {}
 	public int getNumberOfResets() {
 		// TODO Auto-generated method stub
 		return NumberOfResets;
+	}
+	@Override
+	public void setNumberOfResets(int num) {
+		NumberOfResets=num;
 	}
 //==============operations======================
 	@Override
@@ -62,6 +75,10 @@ public StandardD(boolean trace,boolean debug) {}
 		TraceOn=false;
 		DebugOn=false;
 		System.out.println("reset");
+	}
+	public void add(float f) {
+		this.Dd=f;
+		System.out.println("add"+f);
 	}
 
 }
