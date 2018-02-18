@@ -1,0 +1,11 @@
+grant{
+//限定 activation group 能用的命令
+permission com.sun.rmi.rmid.ExecPermission "file:\\D:\\Program Files\\Java\\jdk1.8.0_162\\jre\\bin\\*";
+		
+		permission java.security.AllPermission;
+			       
+//限定 activation group 使用的时候可以使用的option
+permission com.sun.rmi.rmid.ExecOptionPermission "-Djava.security.policy=${examples.activation.policy}";
+permission com.sun.rmi.rmid.ExecOptionPermission "-Djava.security.policy=file:\\D:\\github_repository\\jdkLearning\\jdkLearning\\rmi\\activation\\server\\ActivationTest.policy";
+
+};

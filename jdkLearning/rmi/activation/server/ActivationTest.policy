@@ -1,0 +1,5 @@
+grant{
+permission java.security.AllPermission;
+permission com.sun.rmi.rmid.ExecPermission "file:\\D:\\Program Files\\Java\\jdk1.8.0_162\\jre\\bin\\*";
+permission com.sun.rmi.rmid.ExecOptionPermission "-Djava.security.policy= file:\\D:\\github_repository\\jdkLearning\\jdkLearning\\rmi\\activation\\server\\ActivationTest.policy";
+};
